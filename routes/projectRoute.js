@@ -7,6 +7,7 @@ const {
   getProjectById,
 } = require("../controllers/projectController");
 const { userTokenCheck } = require("../middleware/authmiddleware");
+const { getTasksByProject } = require("../controllers/taskController");
 const router = express.Router();
 
 // router.use(protect);
@@ -16,5 +17,6 @@ router.get("/", userTokenCheck, getAllProjects);
 router.get("/:id", userTokenCheck, getProjectById);
 router.put("/:id", userTokenCheck, updateProject);
 router.delete("/:id", userTokenCheck, deleteProject);
+router.get("/:projectId/tasks", userTokenCheck, getTasksByProject);
 
 module.exports = router;
