@@ -89,29 +89,29 @@ It provides secure user authentication, comprehensive project and task managemen
 
 ### User Register and Login
 
-| Method | Endpoint             | Description       | Request Body          |
-| ------ | -------------------- | ----------------- | --------------------- |
-| POST   | `/api/auth/register` | Register new user | `{ email, password }` |
-| POST   | `/api/auth/login`    | User login        | `{ email, password }` |
+| Method | Endpoint             | Description       | Request Body                                       |
+| ------ | -------------------- | ----------------- | -------------------------------------------------- |
+| POST   | `/api/auth/register` | Register new user | `{ email, password,name, mobileNo, designation  }` |
+| POST   | `/api/auth/login`    | User login        | `{ email, password }`                              |
 
 ### Projects (Authentication Required - Bearer Token)
 
-| Method | Endpoint               | Description                                                            | Request Body                     |
-| ------ | ---------------------- | ---------------------------------------------------------------------- | -------------------------------- |
-| GET    | `/api/projects`        | List projects (supports pagination and search: `?page=&limit=&title=`) | N/A                              |
-| POST   | `/api/projects/create` | Create a new project                                                   | `{ title, description, status }` |
-| GET    | `/api/projects/:id`    | Get project details including tasks                                    | N/A                              |
-| PUT    | `/api/projects/:id`    | Update an existing project                                             | Partial project fields           |
-| DELETE | `/api/projects/:id`    | Delete a project and all its tasks                                     | N/A                              |
+| Method | Endpoint            | Description                                                            | Request Body                                    |
+| ------ | ------------------- | ---------------------------------------------------------------------- | ----------------------------------------------- |
+| GET    | `/api/projects`     | List projects (supports pagination and search: `?page=&limit=&title=`) | N/A                                             |
+| POST   | `/api/projects`     | Create a new project                                                   | `{ title, description, status }`                |
+| GET    | `/api/projects/:id` | Get project details including tasks                                    | N/A                                             |
+| PUT    | `/api/projects/:id` | Update an existing project                                             | `{ title, description, status }` project fields |
+| DELETE | `/api/projects/:id` | Delete a project and all its tasks                                     | N/A                                             |
 
 ### Tasks (Authentication Required - Bearer Token)
 
-| Method | Endpoint                        | Description                                            | Request Body                                         |
-| ------ | ------------------------------- | ------------------------------------------------------ | ---------------------------------------------------- |
-| POST   | `/api/tasks/create`             | Create a task                                          | `{ projectId, title, description, status, dueDate }` |
-| GET    | `/api/tasks/project/:projectId` | List tasks for a project (optional filter: `?status=`) | N/A                                                  |
-| PUT    | `/api/tasks/:id`                | Update a task                                          | Partial task fields                                  |
-| DELETE | `/api/tasks/:id`                | Delete a task                                          | N/A                                                  |
+| Method | Endpoint                    | Description                                            | Request Body                                                   |
+| ------ | --------------------------- | ------------------------------------------------------ | -------------------------------------------------------------- |
+| POST   | `/api/tasks`                | Create a task                                          | `{ projectId, title, description, status, dueDate ,assign_to}` |
+| GET    | `/api/tasks/all/:projectId` | List tasks for a project (optional filter: `?status=`) | N/A                                                            |
+| PUT    | `/api/tasks/:id`            | Update a task                                          | `{  title, description, status, dueDate ,assign_to}`fields     |
+| DELETE | `/api/tasks/:id`            | Delete a task                                          | N/A                                                            |
 
 ---
 

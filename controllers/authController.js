@@ -11,10 +11,13 @@ async function generateToken(id) {
 // REGISTER
 const UserRegister = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password)
-      return res.status(400).json({ message: "Email & password required" });
-
+    const { email, password, name, mobileNo, designation } = req.body;
+    const requiredFields = { email, password, name, mobileNo, designation };
+    for (const [field, value] of Object.entries(requiredFields)) {
+      if (!value) {
+        return res.status(400).json({ message: `${field} is required` });
+      }
+    }
     const exists = await UserModel.findOne({ email });
     if (exists)
       return res.status(400).json({ message: "Email already registered" });
@@ -22,12 +25,19 @@ const UserRegister = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
 
-    const user = await UserModel.create({ email, password: hashed });
+    const user = await UserModel.create({
+      email,
+      password: hashed,
+      name,
+      mobileNo,
+      designation,
+    });
     const token = await generateToken(user._id);
 
     res.status(201).json({
       token,
       user: { id: user._id, email: user.email },
+      message: "User Registered Successfully",
     });
   } catch (err) {
     console.error("Error in UserRegister:", err);
@@ -51,9 +61,10 @@ const UserLogin = async (req, res) => {
 
     const token = await generateToken(user._id);
 
-    res.json({
+    res.status(200).json({
       token,
       user: { id: user._id, email: user.email },
+      message: "User login Successfull.",
     });
   } catch (err) {
     console.error("Error in UserLogin:", err);

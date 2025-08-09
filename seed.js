@@ -29,6 +29,9 @@ async function run() {
   const user = await User.create({
     email: "test@example.com",
     password: hashed,
+    name: "test",
+    designation: "test",
+    mobileNo: "000000000",
   });
   console.log("Created user:", user.email);
 
@@ -36,12 +39,14 @@ async function run() {
     {
       title: "Website Revamp",
       description: "Revamp landing & dashboard UI",
-      status: "active",
+      status: "ACTIVE",
+      creater_id: user._id,
     },
     {
       title: "Mobile App",
       description: "MVP for mobile app",
-      status: "active",
+      status: "ACTIVE",
+      creater_id: user._id,
     },
   ];
 
@@ -53,17 +58,20 @@ async function run() {
       {
         title: `${project.title} - Task 1`,
         description: "First task",
-        status: "todo",
+        status: "IN_PROGRESS",
+        creater_id: user._id,
       },
       {
         title: `${project.title} - Task 2`,
         description: "Second task",
-        status: "in-progress",
+        status: "IN_PROGRESS",
+        creater_id: user._id,
       },
       {
         title: `${project.title} - Task 3`,
         description: "Third task",
-        status: "done",
+        status: "COMPLETED",
+        creater_id: user._id,
       },
     ];
 

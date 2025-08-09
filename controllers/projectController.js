@@ -14,8 +14,8 @@ const createProject = async (req, res) => {
     const project = await ProjectModel.create({
       title,
       description,
-      status,
-      user_id: req.user.id,
+      status: status?.toUpperCase(),
+      creater_id: req.user.id,
     });
     res.status(201).json(project);
   } catch (err) {
@@ -34,14 +34,14 @@ const updateProject = async (req, res) => {
     }
 
     const project = await ProjectModel.findOneAndUpdate(
-      { _id: id, user_id: req.user.id },
+      { _id: id, creater_id: req.user.id },
       req.body,
       { new: true }
     );
 
     if (!project)
       return res.status(404).json({ message: "Project not updated" });
-    res.json(project);
+    res.status(200).json({ project, message: "project Updated Successfully" });
   } catch (err) {
     console.error("Error in updateProject:", err);
     res.status(500).json({ message: err.message });
@@ -59,12 +59,12 @@ const deleteProject = async (req, res) => {
 
     const project = await ProjectModel.findOneAndDelete({
       _id: id,
-      user_id: req.user.id,
+      creater_id: req.user.id,
     });
     if (!project) return res.status(404).json({ message: "Project not found" });
 
     const deletetask = await TaskModel.deleteMany({ project_id: project._id });
-    res.json({ message: "Project and its tasks deleted" });
+    res.status(200).json({ message: "Project and its tasks deleted" });
   } catch (err) {
     console.error("Error in deleteProject:", err);
     res.status(500).json({ message: err.message });
@@ -84,7 +84,7 @@ const getAllProjects = async (req, res) => {
       ? { title: new RegExp(req.query.title, "i") }
       : {};
 
-    const filter = { user_id: req.user.id, ...q };
+    const filter = { creater_id: req.user.id, ...q };
     const total = await ProjectModel.countDocuments(filter);
     const projects = await ProjectModel.find(filter)
       .skip((page - 1) * limit)
@@ -109,7 +109,7 @@ const getProjectById = async (req, res) => {
 
     const project = await ProjectModel.findOne({
       _id: id,
-      user_id: req.user.id,
+      creater_id: req.user.id,
     });
     if (!project) return res.status(404).json({ message: "Project not found" });
 

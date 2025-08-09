@@ -8,9 +8,9 @@ const {
 const { userTokenCheck } = require("../middleware/authmiddleware");
 const router = express.Router();
 
-router.post("/create", userTokenCheck, createTask);
-router.get("/project/:projectId", userTokenCheck, getTasksByProject);
+router.post("/", userTokenCheck, createTask);
 router.put("/:id", userTokenCheck, updateTask);
 router.delete("/:id", userTokenCheck, deleteTask);
+router.get("/all/:projectId", userTokenCheck, getTasksByProject);
 
 module.exports = router;

@@ -11,8 +11,19 @@ const taskSchema = new mongoose.Schema(
     description: { type: String },
     status: {
       type: String,
-      enum: ["todo", "in-progress", "done"],
-      default: "todo",
+      enum: ["IN_PROGRESS", "COMPLETED"],
+      default: "IN_PROGRESS",
+    },
+    assign_to: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+      },
+    ],
+    creater_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: true,
     },
     dueDate: { type: Date },
   },
