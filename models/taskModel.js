@@ -4,7 +4,7 @@ const taskSchema = new mongoose.Schema(
   {
     project_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "projets",
+      ref: "projects",
       required: true,
     },
     title: { type: String, required: true },

@@ -10,7 +10,10 @@ const createTask = async (req, res) => {
     if (!findUser) {
       res.status(404).json({ message: "User Not found" });
     }
-    const project = await ProjectModel.findOne({ _id: projectId, owner });
+    const project = await ProjectModel.findOne({
+      _id: projectId,
+      user_id: req.user.id,
+    });
     if (!project)
       return res
         .status(404)
@@ -41,7 +44,7 @@ const updateTask = async (req, res) => {
 
     const task = await TaskModel.findById(id).populate("project_id");
     if (!task) return res.status(404).json({ message: "Task not found" });
-    if (task.project.user_id.toString() !== req.user.id)
+    if (task.project_id.user_id.toString() !== req.user.id)
       return res.status(403).json({ message: "Not allowed" });
 
     Object.assign(task, req.body);
@@ -64,10 +67,10 @@ const deleteTask = async (req, res) => {
 
     const task = await TaskModel.findById(id).populate("project_id");
     if (!task) return res.status(404).json({ message: "Task not found" });
-    if (task.project.user_id.toString() !== req.user.id)
+    if (task.project_id.user_id.toString() !== req.user.id)
       return res.status(403).json({ message: "Not allowed" });
 
-    await task.remove();
+    await task.deleteOne();
     res.json({ message: "Task deleted" });
   } catch (err) {
     console.error("Error in deleteProject:", err);

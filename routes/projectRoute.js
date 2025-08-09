@@ -11,7 +11,7 @@ const router = express.Router();
 
 // router.use(protect);
 
-router.post("/", userTokenCheck, createProject);
+router.post("/create", userTokenCheck, createProject);
 router.get("/", userTokenCheck, getAllProjects);
 router.get("/:id", userTokenCheck, getProjectById);
 router.put("/:id", userTokenCheck, updateProject);
