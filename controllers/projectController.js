@@ -80,7 +80,9 @@ const getAllProjects = async (req, res) => {
     }
     const page = parseInt(req.query.page || "1", 10);
     const limit = parseInt(req.query.limit || "10", 10);
-    const q = req.query.q ? { title: new RegExp(req.query.q, "i") } : {};
+    const q = req.query.title
+      ? { title: new RegExp(req.query.title, "i") }
+      : {};
 
     const filter = { user_id: req.user.id, ...q };
     const total = await ProjectModel.countDocuments(filter);

@@ -96,13 +96,13 @@ It provides secure user authentication, comprehensive project and task managemen
 
 ### Projects (Authentication Required - Bearer Token)
 
-| Method | Endpoint               | Description                                                        | Request Body                     |
-| ------ | ---------------------- | ------------------------------------------------------------------ | -------------------------------- |
-| GET    | `/api/projects`        | List projects (supports pagination and search: `?page=&limit=&q=`) | N/A                              |
-| POST   | `/api/projects/create` | Create a new project                                               | `{ title, description, status }` |
-| GET    | `/api/projects/:id`    | Get project details including tasks                                | N/A                              |
-| PUT    | `/api/projects/:id`    | Update an existing project                                         | Partial project fields           |
-| DELETE | `/api/projects/:id`    | Delete a project and all its tasks                                 | N/A                              |
+| Method | Endpoint               | Description                                                            | Request Body                     |
+| ------ | ---------------------- | ---------------------------------------------------------------------- | -------------------------------- |
+| GET    | `/api/projects`        | List projects (supports pagination and search: `?page=&limit=&title=`) | N/A                              |
+| POST   | `/api/projects/create` | Create a new project                                                   | `{ title, description, status }` |
+| GET    | `/api/projects/:id`    | Get project details including tasks                                    | N/A                              |
+| PUT    | `/api/projects/:id`    | Update an existing project                                             | Partial project fields           |
+| DELETE | `/api/projects/:id`    | Delete a project and all its tasks                                     | N/A                              |
 
 ### Tasks (Authentication Required - Bearer Token)
 
