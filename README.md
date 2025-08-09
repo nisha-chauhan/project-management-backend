@@ -87,7 +87,7 @@ It provides secure user authentication, comprehensive project and task managemen
 
 ## 📚 API Endpoints
 
-### Authentication
+### User Register and Login
 
 | Method | Endpoint             | Description       | Request Body          |
 | ------ | -------------------- | ----------------- | --------------------- |
