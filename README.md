@@ -13,7 +13,7 @@ It provides secure user authentication, comprehensive project and task managemen
 - **Project Management:** Create, update, delete, and list projects
 - Projects include: `title`, `description`, and `status` (`active` | `completed`)
 - **Task Management:** Full CRUD for tasks linked to projects
-- Tasks include: `title`, `description`, `status` (`todo` | `in-progress` | `done`), and `dueDate`
+- Tasks include: `title`, `description`, `status` (`in-progress` | `done`), and `dueDate`
 - Filter tasks by status for efficient tracking
 - Pagination and search support on project listings
 - Seed script to quickly populate the database with sample data (user, projects, tasks)
